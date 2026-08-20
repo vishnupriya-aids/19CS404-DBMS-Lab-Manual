@@ -34,8 +34,25 @@ END;
 - Use an `IF` statement to compare the values.
 - Display the greater number using `DBMS_OUTPUT.PUT_LINE`.
 
-**Expected Output:**  
-Greater number is: 80
+### program
+```sql
+  SET SERVEROUTPUT ON;
+  
+  DECLARE
+      a NUMBER := 50;
+      b NUMBER := 80;
+  BEGIN
+      IF a > b THEN
+          DBMS_OUTPUT.PUT_LINE('Greater number is: ' || a);
+      ELSE
+          DBMS_OUTPUT.PUT_LINE('Greater number is: ' || b);
+      END IF;
+  END;
+  /
+```
+**Output:**  
+<img width="242" height="124" alt="Screenshot 2025-11-14 113813" src="https://github.com/user-attachments/assets/af8864e9-9f5a-464c-bcf1-4c957932a1ec" />
+
 
 ---
 
@@ -47,8 +64,27 @@ Greater number is: 80
 - Use a `WHILE` loop to iterate from 1 to `n`, adding each number to the sum.
 - Display the result using `DBMS_OUTPUT.PUT_LINE`.
 
-**Expected Output:**  
-Sum of first 10 natural numbers is: 55
+### program
+```sql
+  SET SERVEROUTPUT ON;
+  
+  DECLARE
+      n   NUMBER := 10;
+      i   NUMBER := 1;
+      sum NUMBER := 0;
+  BEGIN
+      WHILE i <= n LOOP
+          sum := sum + i;
+          i := i + 1;
+      END LOOP;
+  
+      DBMS_OUTPUT.PUT_LINE('Sum of first ' || n || ' natural numbers is: ' || sum);
+  END;
+  /
+```
+**Output:**  
+<img width="659" height="198" alt="image" src="https://github.com/user-attachments/assets/a671e938-6f53-4876-82bd-5afe3914ff34" />
+
 
 ---
 
@@ -60,9 +96,32 @@ Sum of first 10 natural numbers is: 55
 - Use a loop to generate the next terms using the formula `c = a + b`.
 - Print each term in the series.
 
-**Expected Output:**  
-n = 7  
-Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8
+### program
+```sql
+  SET SERVEROUTPUT ON;
+  
+  DECLARE
+      n NUMBER := 7;
+      a NUMBER := 0;
+      b NUMBER := 1;
+      c NUMBER;
+      i NUMBER := 1;
+  BEGIN
+      DBMS_OUTPUT.PUT_LINE('Fibonacci sequence:');
+  
+      WHILE i <= n LOOP
+          DBMS_OUTPUT.PUT(a || ' ');
+          c := a + b;
+          a := b;
+          b := c;
+          i := i + 1;
+      END LOOP;
+  END;
+  /
+```
+** Output:**  
+ <img width="770" height="460" alt="image" src="https://github.com/user-attachments/assets/7289f70c-01d7-4b4e-ad0a-03968a041188" />
+
 
 ---
 
@@ -73,9 +132,30 @@ Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8
 - Use a loop to extract each digit using modulo and reverse the number.
 - Display the reversed number.
 
-**Expected Output:**  
-n = 1535  
-Reversed number is 5351
+### program
+```sql
+  SET SERVEROUTPUT ON;
+  
+  DECLARE
+      n NUMBER := 1535;
+      rem NUMBER;
+      rev NUMBER := 0;
+      temp NUMBER;
+  BEGIN
+      temp := n;
+  
+      WHILE temp > 0 LOOP
+          rem := MOD(temp, 10);
+          rev := rev * 10 + rem;
+          temp := FLOOR(temp / 10);
+      END LOOP;
+  
+      DBMS_OUTPUT.PUT_LINE('Reversed number is: ' || rev);
+  END;
+  /
+```
+**Output:**  
+<img width="372" height="189" alt="image" src="https://github.com/user-attachments/assets/0d350c09-8179-46d9-b885-3ea560fecba7" />
 
 ---
 
@@ -85,10 +165,32 @@ Reversed number is 5351
 - Declare three numeric variables `a`, `b`, and `c`.
 - Use nested `IF-ELSIF-ELSE` conditions to find the largest among the three.
 - Display the largest number.
+### program
+```sql
+  SET SERVEROUTPUT ON;
+  
+  DECLARE
+      a NUMBER := 10;
+      b NUMBER := 9;
+      c NUMBER := 15;
+      largest NUMBER;
+  BEGIN
+      IF a > b AND a > c THEN
+          largest := a;
+      ELSIF b > c THEN
+          largest := b;
+      ELSE
+          largest := c;
+      END IF;
+  
+      DBMS_OUTPUT.PUT_LINE('Largest number is: ' || largest);
+  END;
+  /
+```
+**Output:**  
+<img width="401" height="171" alt="image" src="https://github.com/user-attachments/assets/4fae40fa-9029-4853-a8b0-de9ca0e48ca6" />
 
-**Expected Output:**  
-a = 10, b = 9, c = 15  
-Largest of three number is 15
 
 ## RESULT
 Thus, the PL/SQL programs using variables, conditionals, and loops were executed successfully.
+
