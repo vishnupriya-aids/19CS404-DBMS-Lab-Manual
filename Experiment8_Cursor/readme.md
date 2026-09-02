@@ -76,7 +76,36 @@ END;
 - Use a simple cursor to fetch and display employee names and designations.
 - Implement exception handling to catch the relevant exceptions and display appropriate messages.
 
+**Code:**
+```
+-- Create employees table
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    designation TEXT
+);
+
+-- Insert sample data
+INSERT INTO employees (emp_id, emp_name, designation) VALUES
+(1, 'Arun', 'Manager'),
+(2, 'Priya', 'Developer'),
+(3, 'Karthik', 'Tester');
+
+-- Fetch employee details
+SELECT emp_name, designation
+FROM employees;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employee data found'
+    ELSE 'Employee details found'
+END AS Result
+FROM employees;
+```
+
 **Output:**  
+
+<img width="477" height="366" alt="image" src="https://github.com/user-attachments/assets/3dd223c9-f818-47b4-ae5c-68e3784ba6c4" />
+
 The program should display the employee details or an error message.
 
 ---
@@ -95,7 +124,33 @@ The program should display the employee details or an error message.
 - Use a parameterized cursor to accept a salary range as input and fetch employees within that range.
 - Implement exception handling to catch and display relevant error messages.
 
-**Output:**  
+**Code:**
+```
+-- Add salary column
+ALTER TABLE employees ADD COLUMN salary REAL;
+
+-- Insert salary values
+UPDATE employees SET salary = 50000 WHERE emp_id = 1;
+UPDATE employees SET salary = 35000 WHERE emp_id = 2;
+UPDATE employees SET salary = 45000 WHERE emp_id = 3;
+
+-- Salary range: 40000 to 60000
+SELECT emp_id, emp_name, designation, salary
+FROM employees
+WHERE salary BETWEEN 40000 AND 60000;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employees found in the given salary range'
+    ELSE 'Employees found in the given salary range'
+END AS Result
+FROM employees
+WHERE salary BETWEEN 70000 AND 90000;
+```
+
+**Output:** 
+
+<img width="662" height="372" alt="image" src="https://github.com/user-attachments/assets/8f72bb3e-08ab-45a7-871f-0a0d3978f976" />
+
 The program should display the employee details within the specified salary range or an error message if no data is found.
 
 ---
@@ -114,7 +169,31 @@ The program should display the employee details within the specified salary rang
 - Use a cursor FOR loop to fetch and display employee names along with their department numbers.
 - Implement exception handling to catch the relevant exceptions.
 
+**Code:**
+```
+-- Add department number column
+ALTER TABLE employees ADD COLUMN dept_no INTEGER;
+
+-- Insert department numbers
+UPDATE employees SET dept_no = 10 WHERE emp_id = 1;
+UPDATE employees SET dept_no = 20 WHERE emp_id = 2;
+UPDATE employees SET dept_no = 30 WHERE emp_id = 3;
+
+-- Display employee names and department numbers
+SELECT emp_name, dept_no
+FROM employees;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employees found'
+    ELSE 'Employee details found'
+END AS Result
+FROM employees;
+```
+
 **Output:**  
+
+<img width="446" height="353" alt="image" src="https://github.com/user-attachments/assets/499972de-133c-4d63-91bc-c9ed93f2d719" />
+
 The program should display employee names with their department numbers or the appropriate error message if no data is found.
 
 ---
@@ -133,7 +212,37 @@ The program should display employee names with their department numbers or the a
 - Declare a cursor using `%ROWTYPE` to fetch complete rows from the `employees` table.
 - Implement exception handling to catch the relevant exceptions and display appropriate messages.
 
+**Code:**
+```
+-- Create employees table
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    designation TEXT,
+    salary REAL
+);
+
+-- Insert sample data
+INSERT INTO employees (emp_id, emp_name, designation, salary) VALUES
+(1, 'Arun', 'Manager', 50000),
+(2, 'Priya', 'Developer', 35000),
+(3, 'Karthik', 'Tester', 45000);
+
+-- Display complete employee records
+SELECT emp_id, emp_name, designation, salary
+FROM employees;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employees found'
+    ELSE 'Employee records found'
+END AS Result
+FROM employees;
+```
+
 **Output:**  
+
+<img width="442" height="383" alt="image" src="https://github.com/user-attachments/assets/5d5b70e9-2e43-4b15-8a5e-78b30cba59c0" />
+
 The program should display employee records or the appropriate error message if no data is found.
 
 ---
@@ -152,7 +261,53 @@ The program should display employee records or the appropriate error message if 
 - Use a cursor with the `FOR UPDATE` clause to lock the rows of employees in a specific department and update their salary.
 - Implement exception handling to handle `NO_DATA_FOUND` or other errors that may occur.
 
+**Code:**
+```
+-- Create employees table
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    designation TEXT,
+    salary REAL,
+    dept_no INTEGER
+);
+
+-- Insert sample data
+INSERT INTO employees VALUES
+(1, 'Arun', 'Manager', 50000, 10),
+(2, 'Priya', 'Developer', 35000, 20),
+(3, 'Karthik', 'Tester', 45000, 10),
+(4, 'Divya', 'Developer', 40000, 30);
+
+-- Update salary for department 10
+UPDATE employees
+SET salary = salary + 5000
+WHERE dept_no = 10;
+
+-- Display updated records
+SELECT emp_id, emp_name, designation, salary, dept_no
+FROM employees
+WHERE dept_no = 10;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employees found in the department'
+    ELSE 'Employee salaries updated successfully'
+END AS Result
+FROM employees
+WHERE dept_no = 10;
+
+SELECT CASE
+    WHEN COUNT(*) = 0 THEN 'No employees found in the department'
+    ELSE 'Employee salaries updated successfully'
+END AS Result
+FROM employees
+WHERE dept_no = 50;
+```
+
 **Output:**  
+
+<img width="612" height="387" alt="image" src="https://github.com/user-attachments/assets/6bdb9491-8e09-4762-a387-4a245b528c73" />
+
 The program should update employee salaries and display a message, or it should display an error message if no data is found.
 
 ---
